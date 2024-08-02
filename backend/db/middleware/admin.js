@@ -2,7 +2,6 @@
 const router = require("../../routes/admin.js");
 const { Admin } = require("../index.js");
 
-
 function adminMiddleware(req,res,next){
 
     const username = req.headers.username;
@@ -21,6 +20,7 @@ function adminMiddleware(req,res,next){
             })
         
     }
+    
 })
 .catch(function(error) {
     res.status(500).json({ msg: "Internal Server Error" });

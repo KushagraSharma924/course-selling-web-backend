@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-const Adminrouter = require('../express-praqc/routes/admin.js');
-const Userrouter = require('../express-praqc/routes/user.js');
+const Adminrouter = require('../backend/routes/admin.js');
+const Userrouter = require('../backend/routes/user.js');
 
 app.use(bodyParser.json());
 app.use('/admin', Adminrouter);

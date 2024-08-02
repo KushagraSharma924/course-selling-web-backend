@@ -2,7 +2,9 @@ const express = require('express');
 const adminMiddleware = require("../db/middleware/admin");
 const { Admin, Course } = require("../db/index.js");
 const router = express.Router();
-
+const jwt = require('jsonwebtoken')
+const jwtpassword = '123456'
+const secretKey = '1234589'
 // Admin sign-in route
 router.post('/signin', async function(req, res) {
     const { username, password } = req.body;
@@ -11,10 +13,9 @@ router.post('/signin', async function(req, res) {
         username,
         password
     });
-
     res.json({
-        message: 'Admin Created Successfully'
-    });
+        msg:'admin logged in'
+    })
 });
 
 // Course creation route with admin middleware
@@ -48,5 +49,13 @@ router.post('/courses', adminMiddleware , async function(req, res) {
     }
    
 });
-
+router.get('/token',function(req,res){
+    const {username, password} = req.headers
+    const payload = { username, jwtpassword };
+    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+    console.log(token)
+    res.json({
+        token:token
+    });
+})
 module.exports = router;
